@@ -1,0 +1,56 @@
+<!-- user_portal/templates/user_portal/upload_task_completion.html -->
+{% comment %} <h1>Upload Task Completion Proof</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form> {% endcomment %}
+
+
+{% block title %}
+<h2>Upload Task Completion Proof<h2>
+{% endblock %}
+
+{% block content %}
+<h3>Upload Screenshot for: {{ pdf_document.title }}</h3>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload Screenshot</button>
+</form>
+
+<script>
+    // drag and drop 
+    const inputElement = document.querySelector('input[type="file"]');
+    const dropZone = document.createElement('div');
+    dropZone.textContent = "Drag and drop a screenshot here or click to select.";
+    dropZone.style.border = "2px dashed #ccc";
+    dropZone.style.padding = "20px";
+    dropZone.style.textAlign = "center";
+    dropZone.style.marginTop = "20px";
+    inputElement.parentElement.insertBefore(dropZone, inputElement);
+    inputElement.style.display = "none";
+
+    dropZone.addEventListener('click', () => {
+        inputElement.click();
+    });
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = "#000";
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.style.borderColor = "#ccc";
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        inputElement.files = e.dataTransfer.files;
+        dropZone.textContent = inputElement.files[0].name;
+    });
+</script>
+
+<a href="{% url 'user_dashboard' %}">Back to Dashboard</a>
+{% endblock %}

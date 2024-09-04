@@ -1,0 +1,16 @@
+
+<h1>Welcome, {{ user_profile.user.username }}!</h1>
+<p>Total Points: {{ user_profile.total_points }}</p>
+<h2>Completed Tasks</h2>
+<ul>
+    {% for task in completed_tasks %}
+        <li>{{ task.pdf_document.title }} - Completed at {{ task.completed_at }}</li>
+    {% empty %}
+        <li>No tasks completed yet.</li>
+    {% endfor %}
+</ul>
+
+
+
+<h2>Available PDFs to Download</h2>
+<p><a href="{% url 'available_pdfs' %}">Click here to view and download available PDFs</a></p>

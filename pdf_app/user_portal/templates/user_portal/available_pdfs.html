@@ -1,0 +1,17 @@
+
+
+{% block content %}
+<h2>Available PDFs to Download</h2>
+<ul>
+    {% for pdf in pdfs %}
+        <li>
+            <strong>{{ pdf.title }}</strong> - Points: {{ pdf.points }}<br>
+            <a href="{{ pdf.pdf_file.url }}" download>Download PDF</a>
+        </li>
+    {% empty %}
+        <li>No PDFs available at the moment.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'user_dashboard' %}">Back to Dashboard</a>
+{% endblock %}

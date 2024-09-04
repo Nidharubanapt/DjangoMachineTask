@@ -1,0 +1,11 @@
+<h1>Admin Dashboard</h1>
+<a href="{% url 'upload_pdf' %}">Upload New PDF</a>
+<ul>
+    {% for pdf in pdfs %}
+        <li>
+            {{ pdf.title }} - {{ pdf.points }} points
+            <a href="{% url 'update_pdf' pdf.pk %}">Edit</a>
+            <a href="{% url 'delete_pdf' pdf.pk %}">Delete</a>
+        </li>
+    {% endfor %}
+</ul>

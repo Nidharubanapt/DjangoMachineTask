@@ -1,0 +1,15 @@
+
+<h1>Predict Your Marks</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="number_courses">Number of Courses:</label>
+    <input type="text" id="number_courses" name="number_courses"><br>
+    <label for="time_study">Time Spent Studying (hours):</label>
+    <input type="text" id="time_study" name="time_study"><br>
+    <button type="submit">Predict</button>
+</form>
+
+{% if predicted_marks %}
+    <h2>Predicted Marks: {{ predicted_marks }}</h2>
+    <img src="data:image/png;base64,{{ graph }}" alt="Graph">
+{% endif %}
